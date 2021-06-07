@@ -10,9 +10,10 @@ import com.example.hotelManagement.mapper.UserMapper;
 import com.example.hotelManagement.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.awt.*;
+import java.util.List;
 
 @Service
 public class HotelServieImpl implements HotelService {
@@ -24,6 +25,7 @@ public class HotelServieImpl implements HotelService {
     private final UserListMapper userListMapper;
     private final UserDetailsMapper userDetailsMapper;
 
+    @Autowired
     public HotelServieImpl(UserRepository userRepository, UserMapper userMapper, UserListMapper userListMapper, UserDetailsMapper userDetailsMapper) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
