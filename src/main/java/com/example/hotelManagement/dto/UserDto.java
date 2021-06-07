@@ -1,11 +1,11 @@
 package com.example.hotelManagement.dto;
 
-public class DetailsUserDto {
+public class UserDto {
     private Long userId;
     private int numberPhone;
     private String password;
 
-    public DetailsUserDto() {
+    public UserDto() {
     }
 
     public Long getUserId() {
@@ -32,12 +32,5 @@ public class DetailsUserDto {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "DetailsUserDto{" +
-                "userId=" + userId +
-                ", numberPhone=" + numberPhone +
-                ", password='" + password + '\'' +
-                '}';
-    }
+
 }

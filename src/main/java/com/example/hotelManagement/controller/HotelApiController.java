@@ -2,6 +2,7 @@ package com.example.hotelManagement.controller;
 
 import com.example.hotelManagement.dto.CreateUserDto;
 import com.example.hotelManagement.dto.DetailsUserDto;
+import com.example.hotelManagement.dto.UserDto;
 import com.example.hotelManagement.service.HotelService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,20 +31,29 @@ public class HotelApiController {
     // Show all users
     @CrossOrigin
     @GetMapping(value = "/users", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<List<DetailsUserDto>> getUsers(){
+    public ResponseEntity<List<UserDto>> getUsers(){
         LOGGER.info("Find all users");
 
-        List<DetailsUserDto> userDtoList = hotelService.getUsers();
-        return new ResponseEntity<>(HttpStatus.OK); // detailsUserDto,HttpStatus.OK
+        List<UserDto> userDtoList = hotelService.findAll();
+        return new ResponseEntity<>(userDtoList, HttpStatus.OK);
     }
 
     // Create new user
     @CrossOrigin
-    @PostMapping(value = "/user", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @PostMapping(value = "/userS", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<?> createUser(@RequestBody CreateUserDto createUserDto){
         LOGGER.info("create user: {}",createUserDto);
 
         hotelService.createUser(createUserDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @CrossOrigin
+    @GetMapping(value = "/users/{usersId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<DetailsUserDto> detailsUser(@PathVariable Long userId){
+        LOGGER.info("details user: {}", userId);
+
+        DetailsUserDto detailsUserDto = hotelService.findUser(userId);
+        return new ResponseEntity<>(detailsUserDto, HttpStatus.OK);
     }
 }
