@@ -49,7 +49,7 @@ public class HotelApiController {
     }
 
     @CrossOrigin
-    @GetMapping(value = "/users/{usersId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/users/{userId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<DetailsUserDto> detailsUser(@PathVariable Long userId){
         LOGGER.info("details user: {}", userId);
 
