@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -36,8 +37,9 @@ public class HotelServieImpl implements HotelService {
     // Find all users
     @Override
     public List<UserDto> findAll() {
-        List<User> users = userRepository.findByOrder();
-        return userListMapper.mapToDto(users);
+        //List<User> users = userRepository.findByOrder();
+        //return userListMapper.mapToDto(users);
+        return new ArrayList<>();
     }
 
     //Create new user
@@ -49,7 +51,7 @@ public class HotelServieImpl implements HotelService {
 
     @Override
     public DetailsUserDto findUser(Long userId) {
-        User user = userRepository.findOneByUserId(userId);
+        User user = userRepository.getOne(userId);
 
         if (user == null){
             return new DetailsUserDto();

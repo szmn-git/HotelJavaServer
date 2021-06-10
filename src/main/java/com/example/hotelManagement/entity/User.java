@@ -13,7 +13,7 @@ public class User implements Serializable {
     private Long userId;
 
     @Column(name = "phone_number")
-    private int phoneNumber;
+    private Integer phoneNumber;
 
     @Column(name = "password")
     private String password;
@@ -29,11 +29,11 @@ public class User implements Serializable {
         this.userId = userId;
     }
 
-    public int getPhoneNumber() {
+    public Integer getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(Integer phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
