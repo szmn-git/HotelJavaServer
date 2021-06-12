@@ -39,7 +39,7 @@ public class HotelApiController {
 
     // Create new user
     @CrossOrigin
-    @PostMapping(value = "/users")
+    @PostMapping(value = "/users/add")
     public ResponseEntity<?> createUser(@RequestBody CreateUserDto createUserDto){
         LOGGER.info("create user: {}",createUserDto);
 
@@ -56,12 +56,25 @@ public class HotelApiController {
         return new ResponseEntity<>(detailsUserDto, HttpStatus.OK);
     }
 
+    /*
     @CrossOrigin
-    @GetMapping(value = "/users/login/{phoneNumber}")
+    @GetMapping(value = "/users/login/{phoneNumber}/{password}")
     public ResponseEntity<DetailsUserDto> phoneUser(@PathVariable Integer phoneNumber){
         LOGGER.info("details user: {}", phoneNumber);
 
         DetailsUserDto detailsUserDto = hotelService.findByPhone(phoneNumber);
+        LOGGER.info("password: {}", detailsUserDto.getPassword());
         return new ResponseEntity<>(detailsUserDto, HttpStatus.OK);
+    }
+     */
+
+    // Validate user
+    @CrossOrigin
+    @GetMapping(value = "/users/login/{phoneNumber}/{password}")
+    public ResponseEntity<String> loginUser(@PathVariable Integer phoneNumber, @PathVariable String password){
+        LOGGER.info("received phone number: {}", phoneNumber);
+        LOGGER.info("received password: {}", password);
+
+        return new ResponseEntity<>((hotelService.validateUser(phoneNumber, password)), HttpStatus.OK);
     }
 }
