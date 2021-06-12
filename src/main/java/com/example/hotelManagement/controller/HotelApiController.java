@@ -55,4 +55,13 @@ public class HotelApiController {
         DetailsUserDto detailsUserDto = hotelService.findUser(userId);
         return new ResponseEntity<>(detailsUserDto, HttpStatus.OK);
     }
+
+    @CrossOrigin
+    @GetMapping(value = "/users/login/{phoneNumber}")
+    public ResponseEntity<DetailsUserDto> phoneUser(@PathVariable Integer phoneNumber){
+        LOGGER.info("details user: {}", phoneNumber);
+
+        DetailsUserDto detailsUserDto = hotelService.findByPhone(phoneNumber);
+        return new ResponseEntity<>(detailsUserDto, HttpStatus.OK);
+    }
 }

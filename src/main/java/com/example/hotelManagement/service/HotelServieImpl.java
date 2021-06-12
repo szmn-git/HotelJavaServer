@@ -37,9 +37,8 @@ public class HotelServieImpl implements HotelService {
     // Find all users
     @Override
     public List<UserDto> findAll() {
-        //List<User> users = userRepository.findByOrder();
-        //return userListMapper.mapToDto(users);
-        return new ArrayList<>();
+        List<User> users = userRepository.findByOrderByUserIdDesc();
+        return userListMapper.mapToDto(users);
     }
 
     //Create new user
@@ -53,10 +52,13 @@ public class HotelServieImpl implements HotelService {
     public DetailsUserDto findUser(Long userId) {
         User user = userRepository.getOne(userId);
 
-        if (user == null){
-            return new DetailsUserDto();
-        }
+        return userDetailsMapper.mapToDto(user);
+    }
 
+    // Find user by phone number
+    @Override
+    public DetailsUserDto findByPhone(Integer phoneNumber) {
+        User user = userRepository.findByPhoneNumberIs(phoneNumber);
         return userDetailsMapper.mapToDto(user);
     }
 }
