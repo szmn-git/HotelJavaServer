@@ -15,6 +15,8 @@ public interface HotelService {
 
     DetailsUserDto findUser(Long userId);
 
-    DetailsUserDto findByPhone(Integer phoneNumber);
+    String validateUser(Integer phoneNumber, String password);
+
+    //Boolean validateUser();
 
 }

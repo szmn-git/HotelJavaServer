@@ -16,6 +16,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
+
 @Service
 public class HotelServieImpl implements HotelService {
 
@@ -56,9 +59,29 @@ public class HotelServieImpl implements HotelService {
     }
 
     // Find user by phone number
+    /*
     @Override
     public DetailsUserDto findByPhone(Integer phoneNumber) {
         User user = userRepository.findByPhoneNumberIs(phoneNumber);
         return userDetailsMapper.mapToDto(user);
     }
+     */
+
+    @Override
+    public String validateUser(Integer phoneNumber, String password) {
+        String isValidate;
+        //search database by number
+        User user = userRepository.findByPhoneNumberIs(phoneNumber);
+        if(user == null) {
+            isValidate = "NO ACC";
+        }
+        else if(user.getPassword().equals(password)) {
+            isValidate = "OK";
+        }
+        else {
+            isValidate = "WRONG PASSWORD";
+        }
+        return isValidate;
+    }
+
 }
