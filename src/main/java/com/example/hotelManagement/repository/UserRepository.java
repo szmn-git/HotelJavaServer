@@ -22,10 +22,8 @@ public interface UserRepository extends JpaRepository<User, Long>, CrudRepositor
 
     User findByPhoneNumberIs(Integer phoneNumber);
 
-    /* Delete user
-    @Modifying
-    @Query("DELETE FROM User u WHERE u.userId = :userId")
-    void deleteById(@Param("userId") Long userId); */
+    // Delete user
+    void deleteById(Long userId);
 
     //User findOneByUserId(Long userId);
 

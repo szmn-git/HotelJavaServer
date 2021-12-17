@@ -37,16 +37,7 @@ public class HotelApiController {
         return new ResponseEntity<>(userDtoList, HttpStatus.OK);
     }
 
-    // Create new user
-    @CrossOrigin
-    @PostMapping(value = "/users/add")
-    public ResponseEntity<?> createUser(@RequestBody CreateUserDto createUserDto){
-        LOGGER.info("create user: {}",createUserDto);
-
-        hotelService.createUser(createUserDto);
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
-
+    // Details of # user
     @CrossOrigin
     @GetMapping(value = "/reception/user/{userId}")
     public ResponseEntity<DetailsUserDto> detailsUser(@PathVariable Long userId){
@@ -56,17 +47,26 @@ public class HotelApiController {
         return new ResponseEntity<>(detailsUserDto, HttpStatus.OK);
     }
 
-    /*
+    // Delete by ID
     @CrossOrigin
-    @GetMapping(value = "/users/login/{phoneNumber}/{password}")
-    public ResponseEntity<DetailsUserDto> phoneUser(@PathVariable Integer phoneNumber){
-        LOGGER.info("details user: {}", phoneNumber);
+    @DeleteMapping(value = "/reception/user/{userId}")
+    public ResponseEntity<?> deleteUser(@PathVariable Long userId){
+        LOGGER.info("deleted user: {}", userId);
 
-        DetailsUserDto detailsUserDto = hotelService.findByPhone(phoneNumber);
-        LOGGER.info("password: {}", detailsUserDto.getPassword());
-        return new ResponseEntity<>(detailsUserDto, HttpStatus.OK);
+        hotelService.deleteUser(userId);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
-     */
+
+    // Create new user
+    @CrossOrigin
+    @PostMapping(value = "/users/add")
+    public ResponseEntity<?> createUser(@RequestBody CreateUserDto createUserDto){
+        LOGGER.info("create user: {}",createUserDto);
+
+        hotelService.createUser(createUserDto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 
     // Validate user
     @CrossOrigin

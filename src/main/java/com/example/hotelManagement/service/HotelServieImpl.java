@@ -58,14 +58,11 @@ public class HotelServieImpl implements HotelService {
         return userDetailsMapper.mapToDto(user);
     }
 
-    // Find user by phone number
-    /*
+    // Find all users
     @Override
-    public DetailsUserDto findByPhone(Integer phoneNumber) {
-        User user = userRepository.findByPhoneNumberIs(phoneNumber);
-        return userDetailsMapper.mapToDto(user);
+    public void deleteUser(Long userId) {
+        userRepository.deleteById(userId);
     }
-     */
 
     @Override
     public String validateUser(Integer phoneNumber, String password) {

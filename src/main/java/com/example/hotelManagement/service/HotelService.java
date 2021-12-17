@@ -17,6 +17,5 @@ public interface HotelService {
 
     String validateUser(Integer phoneNumber, String password);
 
-    //Boolean validateUser();
-
+    void deleteUser(Long userId);
 }
