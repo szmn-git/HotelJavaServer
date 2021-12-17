@@ -29,7 +29,7 @@ public class HotelApiController {
 
     // Show all users
     @CrossOrigin
-    @GetMapping(value = "/users")
+    @GetMapping(value = "/reception/users")
     public ResponseEntity<List<UserDto>> getUsers(){
         LOGGER.info("Find all users");
 
@@ -48,7 +48,7 @@ public class HotelApiController {
     }
 
     @CrossOrigin
-    @GetMapping(value = "/users/{userId}")
+    @GetMapping(value = "/reception/user/{userId}")
     public ResponseEntity<DetailsUserDto> detailsUser(@PathVariable Long userId){
         LOGGER.info("details user: {}", userId);
 
@@ -70,7 +70,7 @@ public class HotelApiController {
 
     // Validate user
     @CrossOrigin
-    @GetMapping(value = "/users/login/{phoneNumber}/{password}")
+    @GetMapping(value = "/login/{phoneNumber}/{password}")
     public ResponseEntity<String> loginUser(@PathVariable Integer phoneNumber, @PathVariable String password){
         LOGGER.info("received phone number: {}", phoneNumber);
         LOGGER.info("received password: {}", password);
