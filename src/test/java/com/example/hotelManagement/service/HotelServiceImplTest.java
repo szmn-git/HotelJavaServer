@@ -9,8 +9,10 @@ import org.junit.Assert;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
+import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,13 +22,18 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 class HotelServiceImplTest {
 
+    @Mock
+    UserRepository userRepository;
+
+
     @InjectMocks
     private HotelServiceImpl hotelService;
 
 
-
     @BeforeEach
-    void setUp() {/*
+    void setUp() {
+        MockitoAnnotations.initMocks(this);
+        /*
         UserDto testUser = new UserDto();
 
         testUser.setUserId((long) 1);
@@ -55,8 +62,8 @@ class HotelServiceImplTest {
 
     @Test
     void validateUser() {
-        String isOK = "OK";
-        String tested = hotelService.validateUser(999111000,"polskagurom");
+        String isOK = "NO ACC";
+        String tested = hotelService.validateUser(123456789,"ZAQ1@wsx");
         assertEquals(isOK,tested);
     }
 }
