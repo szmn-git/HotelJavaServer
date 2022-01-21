@@ -1,69 +1,56 @@
 package com.example.hotelManagement.service;
 
-import com.example.hotelManagement.dto.UserDto;
 import com.example.hotelManagement.entity.User;
-import com.example.hotelManagement.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.Assert;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import static org.mockito.Mockito.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import static org.mockito.Mockito.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@ExtendWith(MockitoExtension.class)
+
 class HotelServiceImplTest {
 
-    @Mock
-    UserRepository userRepository;
-
-
-    @InjectMocks
-    private HotelServiceImpl hotelService;
-
+    private static User testUser1;
+    private HotelService mockHotelService;
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.initMocks(this);
-        /*
-        UserDto testUser = new UserDto();
 
-        testUser.setUserId((long) 1);
-        testUser.setNumberPhone(999111000);
-        testUser.setPassword("polskagurom");
+        mockHotelService = mock(HotelService.class);
 
-        users.add(testUser);*/
+        testUser1 = new User();
+        testUser1.setUserId((long) 1);
+        testUser1.setPhoneNumber(123123123);
+        testUser1.setPassword("alamakota");
+
+        when(mockHotelService.validateUser(anyInt(),anyString())).thenReturn("WRONG");
+        when(mockHotelService.validateUser(anyInt(),eq(testUser1.getPassword()))).thenReturn("NULL");
+        when(mockHotelService.validateUser(testUser1.getPhoneNumber(),testUser1.getPassword())).thenReturn("OK");
+
     }
 
     @Test
-    void findAll() {
-        //Assert.assertArrayEquals(hotelService.findAll().toArray(),users.toArray());
+    void validateUserOK() {
+        String isOK = "OK";
+        String testedString = mockHotelService.validateUser(123123123, "alamakota");
+        assertNotNull(testedString);
+        assertEquals(isOK, testedString);
     }
 
     @Test
-    void createUser() {
+    void validateUserNULL() {
+        String isNULL = "NULL";
+        String testedString = mockHotelService.validateUser(125633890, "alamakota");
+        assertNotNull(testedString);
+        assertEquals(isNULL, testedString);
     }
 
     @Test
-    void findUser() {
-    }
-
-    @Test
-    void deleteUser() {
-    }
-
-    @Test
-    void validateUser() {
-        String isOK = "NO ACC";
-        String tested = hotelService.validateUser(123456789,"ZAQ1@wsx");
-        assertEquals(isOK,tested);
+    void validateUserWRONG() {
+        String isWRONG = "WRONG";
+        String testedString = mockHotelService.validateUser(123123123, "alamapsa");
+        assertNotNull(testedString);
+        assertEquals(isWRONG, testedString);
     }
 }
